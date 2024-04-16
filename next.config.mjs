@@ -8,11 +8,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "colegiocei.es",
-      },
-      {
-        protocol: "https",
-        hostname: "upload.wikimedia.org",
+        hostname: "lh3.googleusercontent.com",
       },
       {
         protocol: "https",

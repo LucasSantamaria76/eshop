@@ -5,7 +5,7 @@ import { create } from "zustand";
 import { createSelectors } from "./createSelectors";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { ProfileType } from "@/types/profile";
+import { ProfileType } from "@/types";
 
 interface State {
   user: ProfileType | null;

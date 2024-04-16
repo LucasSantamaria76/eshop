@@ -18,7 +18,7 @@ export const registerSchema = zfd
         .string({ required_error: "La contraseña es requerida" })
         .min(6, { message: "Debe tener 6 o más caracteres" }),
     ),
-    name: zfd.text(
+    full_name: zfd.text(
       z
         .string({
           required_error: "El nombre es requerido",

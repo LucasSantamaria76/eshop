@@ -3,13 +3,11 @@
 import { supabaseErrors } from "@/constants";
 import CreateSupabaseServerClient from "@/supabase/server";
 import { registerSchema } from "@/validations";
-import { User } from "@supabase/supabase-js";
 import { ZodError } from "zod";
 
 export type State =
   | {
       status: "success";
-      user: User;
     }
   | {
       status: "error";
@@ -23,35 +21,33 @@ export type State =
 
 export async function signUp(prevState: State, data: FormData): Promise<State> {
   try {
-    const { email, password, name, address, city, avatar_url, phone } =
+    const { email, password, full_name, address, city, avatar_url, phone } =
       registerSchema.parse(data);
 
     const supabase = await CreateSupabaseServerClient();
 
-    const {
-      data: { user },
-      error,
-    } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: {
-          name,
+          full_name,
           address,
           phone,
           city,
           avatar_url,
+          email,
         },
       },
     });
 
     if (error) throw error;
-    if (!user) throw new Error();
+
     return {
       status: "success",
-      user,
     };
   } catch (e: any) {
+    console.log({ e });
     const error: any = {
       status: "error",
       message: supabaseErrors[e.message] ?? "Datos del formulario no válidos.",
@@ -70,3 +66,15 @@ export async function signUp(prevState: State, data: FormData): Promise<State> {
     return error;
   }
 }
+
+
+/* 
+full_name
+email
+address
+phone
+city
+avatar_url
+email_verified
+
+*/

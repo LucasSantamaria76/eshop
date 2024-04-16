@@ -1,9 +1,11 @@
 "use client";
 
+import { useModalStore } from "@/store/modalStore";
 import { Popover, Avatar } from "flowbite-react";
 import Image from "next/image";
 import { type Dispatch, type SetStateAction, useRef } from "react";
 import { UseFormSetValue } from "react-hook-form";
+import { MODAL_AVATARS_BOX } from "../../store/modalStore";
 
 type Props = {
   avatarSelected: { gender: string; numImg: number };
@@ -13,6 +15,8 @@ type Props = {
 };
 
 export const AvatarsSelect = ({ avatarSelected, setAvatarSelected }: Props) => {
+  const onShow = useModalStore.use.onShow();
+
   const avatars = useRef(
     Array(8)
       .fill(0)
@@ -32,7 +36,7 @@ export const AvatarsSelect = ({ avatarSelected, setAvatarSelected }: Props) => {
   return (
     <Popover
       aria-labelledby="default-popover"
-      trigger="hover"
+      trigger="click"
       placement="right"
       className="z-50 max-w-40 rounded bg-white shadow shadow-black/50 dark:bg-gray-800 sm:max-w-lg md:max-w-xl"
       content={
@@ -75,7 +79,6 @@ export const AvatarsSelect = ({ avatarSelected, setAvatarSelected }: Props) => {
           </div>
         </>
       }
-      arrow={false}
     >
       <div className="flex w-fit flex-col">
         <span className="text-center text-xs dark:text-white">Seleccionar</span>
@@ -86,6 +89,7 @@ export const AvatarsSelect = ({ avatarSelected, setAvatarSelected }: Props) => {
           height={100}
           alt="avatar user"
           className="flex cursor-pointer border border-gray-500 hover:ring-1 hover:ring-cyan-500"
+          onClick={() => onShow(MODAL_AVATARS_BOX)}
         />
       </div>
     </Popover>

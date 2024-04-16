@@ -22,15 +22,7 @@ export type Database = {
           created_at?: string
           id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "public_cart_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       cart_item: {
         Row: {
@@ -178,31 +170,34 @@ export type Database = {
           address: string | null
           avatar_url: string | null
           city: string | null
-          created_at: string | null
+          email: string | null
+          email_verified: boolean | null
+          full_name: string | null
           id: string
-          name: string
           phone: string | null
-          wish_list: string[] | null
+          updated_at: string | null
         }
         Insert: {
           address?: string | null
           avatar_url?: string | null
           city?: string | null
-          created_at?: string | null
+          email?: string | null
+          email_verified?: boolean | null
+          full_name?: string | null
           id: string
-          name: string
           phone?: string | null
-          wish_list?: string[] | null
+          updated_at?: string | null
         }
         Update: {
           address?: string | null
           avatar_url?: string | null
           city?: string | null
-          created_at?: string | null
+          email?: string | null
+          email_verified?: boolean | null
+          full_name?: string | null
           id?: string
-          name?: string
           phone?: string | null
-          wish_list?: string[] | null
+          updated_at?: string | null
         }
         Relationships: [
           {
