@@ -1,7 +1,7 @@
 import { AvatarsSelect } from "@/components/avatars-select/avatars-select";
 import { Icon } from "@/components/icon/Icon";
 import { InputText } from "@/components/inputs/InputText";
-import { LogupType } from "@/types/logup";
+import { LogupType } from "@/types";
 import { Button, Spinner } from "flowbite-react";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
@@ -21,82 +21,90 @@ export const FormContent = ({ register, errors }: FormContentProps) => {
     numImg: 1,
   });
 
-  const fields = [
-    {
-      name: "email",
-      label: "Correo electrónico",
-      type: "email",
-      icon: null,
-      fullWidth: true,
-    },
-    {
-      name: "full_name",
-      label: "Nombre",
-      type: "text",
-      icon: null,
-    },
-    {
-      name: "phone",
-      label: "Teléfono",
-      type: "text",
-      icon: null,
-    },
-    {
-      name: "address",
-      label: "Domicilio",
-      type: "text",
-      icon: null,
-    },
-    {
-      name: "city",
-      label: "Ciudad",
-      type: "text",
-      icon: null,
-    },
-    {
-      name: "password",
-      label: "Contraseña",
-      type: showPassword ? "text" : "password",
-      icon: (
-        <Icon
-          name={showPassword ? "EyeOff" : "Eye"}
-          className="absolute right-2 top-[10px] z-30"
-          onClick={() => setShowPassword(!showPassword)}
-        />
-      ),
-    },
-    {
-      name: "confirmPassword",
-      label: "Confirmar contraseña",
-      type: showPassword ? "text" : "password",
-      icon: (
-        <Icon
-          name={showPassword ? "EyeOff" : "Eye"}
-          className="absolute right-1 top-[10px] z-30 "
-          onClick={() => setShowPassword(!showPassword)}
-        />
-      ),
-    },
-  ];
-
   return (
-    <div className="relative grid grid-cols-1 gap-3">
-      <AvatarsSelect avatarSelected={avatar} setAvatarSelected={setAvatar} />
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {fields.map((field) => (
+    <div className="relative m-5 flex flex-col gap-3">
+      <div className="max-h-[520px] overflow-y-auto">
+        <div className="flex flex-col sm:flex-row">
+          <AvatarsSelect
+            avatarSelected={avatar}
+            setAvatarSelected={setAvatar}
+          />
+          <div className="mt-2 flex h-32 w-full flex-col justify-around self-end sm:pl-5">
+            <InputText
+              name="email"
+              label="Correo electrónico"
+              errors={errors}
+              register={register}
+              type="email"
+              icon={null}
+              fullWidth
+              autoFocus
+            />
+            <InputText
+              name="full_name"
+              label="Nombre"
+              errors={errors}
+              register={register}
+              type="text"
+              icon={null}
+              fullWidth
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-y-2 sm:mt-2 sm:grid-cols-3 sm:gap-x-2">
           <InputText
-            key={field.name}
-            name={field.name}
-            label={field.label}
+            name="phone"
+            label="Teléfono"
             errors={errors}
             register={register}
-            type={field.type}
-            icon={field.icon}
-            fullWidth={field.fullWidth}
+            type="text"
+            icon={null}
           />
-        ))}
+          <InputText
+            name="address"
+            label="Dirección"
+            errors={errors}
+            register={register}
+            type="text"
+            icon={null}
+          />
+          <InputText
+            name="city"
+            label="Ciudad"
+            errors={errors}
+            register={register}
+            type="text"
+            icon={null}
+          />
+        </div>
+        <div className="mt-2 grid grid-cols-1 gap-y-2 sm:grid-cols-2 sm:space-x-2">
+          <InputText
+            errors={errors}
+            register={register}
+            name="password"
+            label="Contraseña"
+            type={showPassword ? "text" : "password"}
+            icon=<Icon
+              name={showPassword ? "EyeOff" : "Eye"}
+              className="absolute right-2 top-[10px] z-30"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          />
+          <InputText
+            errors={errors}
+            register={register}
+            name="confirmPassword"
+            label="Confirmar contraseña"
+            type={showPassword ? "text" : "password"}
+            icon=<Icon
+              name={showPassword ? "EyeOff" : "Eye"}
+              className="absolute right-2 top-[10px] z-30"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          />
+        </div>
       </div>
+
       <input
         type="hidden"
         {...register("avatar_url")}

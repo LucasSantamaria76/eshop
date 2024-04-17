@@ -24,7 +24,7 @@ export const InputText = ({
   autoFocus,
 }: Props) => {
   return (
-    <div className={`relative ${fullWidth && "col-span-2"} my-1`}>
+    <div className={`relative ${fullWidth && "col-span-2"} mb-1`}>
       <FloatingLabel
         autoFocus={autoFocus}
         type={type}

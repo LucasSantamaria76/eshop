@@ -1,6 +1,6 @@
 import { Icon } from "@/components/icon/Icon";
 import { InputText } from "@/components/inputs/InputText";
-import { LoginType } from "@/types/login";
+import { LoginType } from "@/types";
 import { Button, Spinner } from "flowbite-react";
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
@@ -17,7 +17,7 @@ export const FormContent = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative grid grid-cols-1 gap-3">
+    <div className="relative m-5 flex flex-col gap-3">
       <InputText
         autoFocus
         name="email"

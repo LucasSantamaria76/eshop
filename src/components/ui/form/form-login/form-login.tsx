@@ -7,15 +7,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { loginSchema } from "@/validations";
 import { State, signIn } from "@/app/auth/signin/actions";
-import { LoginType } from "@/types/login";
+import { LoginType } from "@/types";
 import { useModalStore, MODAL_LOGIN } from "@/store/modalStore";
 import { Button } from "flowbite-react";
 import Image from "next/image";
 import { FormContent } from "./form-content";
 import { loginWithGoogle } from "@/supabase/login-with-Google";
-import { getSessionUser } from "@/supabase";
-import { ProfileType } from "@/types";
+import type { ProfileType } from "@/types";
 import { useShopStore } from "@/store/shopStore";
+import { getSessionUser } from "@/supabase";
 
 type Props = {
   setIsLogin: Dispatch<SetStateAction<boolean>>;
@@ -54,16 +54,26 @@ export const FormLogin = ({ setIsLogin }: Props) => {
 
   return (
     <>
-      <form action={formAction} className="flex flex-col space-y-3">
+      <form action={formAction} className="flex flex-col">
         <FormContent register={register} errors={errors} />
-        <span className="my-2 border-b border-black" />
+
+        <p className="mx-5 mb-5 text-sm dark:text-white">
+          ¿No tienes una cuenta?
+          <button
+            className="ml-2 cursor-pointer text-sm text-blue-800 dark:text-blue-500"
+            onClick={() => setIsLogin(false)}
+          >
+            Regístrate
+          </button>
+        </p>
+        <span className="border-b border-black" />
 
         <Button
           color="gray"
           onClick={loginWithGoogle}
-          className="shadow dark:shadow-gray-400"
+          className="m-5 shadow dark:shadow-gray-400"
         >
-          Inicia sesión con
+          O inicia sesión con
           <Image
             src={"/google.png"}
             width={50}
@@ -72,16 +82,6 @@ export const FormLogin = ({ setIsLogin }: Props) => {
             className="ml-2 h-5 w-20"
           />
         </Button>
-
-        <p className="text-sm dark:text-white">
-          ¿No tienes una cuenta?
-          <span
-            className="ml-2 cursor-pointer text-sm text-blue-800 dark:text-blue-500"
-            onClick={() => setIsLogin(false)}
-          >
-            Regístrate
-          </span>
-        </p>
       </form>
     </>
   );

@@ -1,10 +1,9 @@
 "use client";
 
-import { AvatarDialogBox, CategoriesBar, NavBar } from "@/components";
+import { CategoriesBar, NavBar } from "@/components";
 import { useShopStore } from "@/store/shopStore";
 import { getSessionUser } from "@/supabase";
-import { ProfileType } from "@/types";
-import { useRouter } from "next/navigation";
+import type { ProfileType } from "@/types";
 import { useEffect } from "react";
 
 type LayoutProps = {
@@ -13,7 +12,6 @@ type LayoutProps = {
 
 export default function ShopLayout({ children }: Readonly<LayoutProps>) {
   const setUser = useShopStore.use.setUser();
-  const { refresh } = useRouter();
 
   useEffect(() => {
     getSessionUser().then((user: ProfileType | null) => setUser(user));
@@ -24,7 +22,6 @@ export default function ShopLayout({ children }: Readonly<LayoutProps>) {
       <NavBar />
       <CategoriesBar />
       {children}
-      <AvatarDialogBox />
     </div>
   );
 }

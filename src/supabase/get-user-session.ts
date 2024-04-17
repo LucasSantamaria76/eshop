@@ -1,4 +1,4 @@
-import { ProfileType } from "@/types";
+import type { ProfileType } from "@/types";
 import { supabase } from "./client";
 
 const getProfile = async (id: string) => {

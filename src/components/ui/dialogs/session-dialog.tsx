@@ -16,6 +16,7 @@ export const SessionDialog = () => {
       dismissible
       show={isOpen}
       theme={modalTheme}
+      size="3xl"
       position="center"
       onClose={() => {
         setIsLogin(true);

@@ -16,10 +16,10 @@ import { State, signUp } from "@/app/auth/signup/actions";
 import { useModalStore, MODAL_LOGIN } from "@/store/modalStore";
 import { supabase } from "@/supabase/client";
 import { useShopStore } from "@/store/shopStore";
-import { LogupType } from "@/types/logup";
+import { LogupType } from "@/types";
 import { FormContent } from "./form-content";
+import type { ProfileType } from "@/types";
 import { getSessionUser } from "@/supabase";
-import { ProfileType } from "@/types";
 
 const getProfile = async (id: string) => {
   try {
@@ -48,7 +48,7 @@ export const FormLogup = ({ setIsLogin }: Props) => {
     setError,
     setFocus,
   } = useForm<LogupType>({
-    mode: "onBlur",
+    mode: "onSubmit",
     resolver: zodResolver(registerSchema),
   });
   const [state, formAction] = useFormState<State, FormData>(signUp, null);
@@ -75,23 +75,18 @@ export const FormLogup = ({ setIsLogin }: Props) => {
 
   return (
     <>
-      <form action={formAction} className="flex flex-col space-y-3">
-        {state?.status === "error" && state.message ? (
-          <p className="absolute left-40 top-44 rounded-md border border-red-500 bg-red-500/30 px-6 py-2 text-center text-xs text-black">
-            {state.message}
-          </p>
-        ) : null}
+      <form action={formAction} className="mb-5 flex flex-col">
         <FormContent register={register} errors={errors} />
         <span className="my-2 border-b border-black" />
 
-        <p className="text-sm dark:text-white">
+        <p className="ml-5 pt-2 text-sm dark:text-white">
           ¿Ya tienes una cuenta?
-          <span
+          <button
             className="ml-2 cursor-pointer text-sm text-blue-800 dark:text-blue-500"
             onClick={() => setIsLogin(true)}
           >
             Inicia sesión
-          </span>
+          </button>
         </p>
       </form>
     </>

@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    user-select: none;    
+html {
+  user-select: none;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #1e40af;
+}
+
+.btnCustom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer; 
+  background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+  border-radius: 10px;
+  border: 1px solid #8F9092;
+  transition: all 0.2s ease;
+  font-weight: 700;
+  color: #606060;
+  text-shadow: 0 1px #fff;
+}
+
+.btnCustom:active, .selected {
+  box-shadow: 0 4px 3px 1px #FCFCFC, 0 4px 4px #D6D7D9, 0 -2px 2px #CECFD1, inset 0 0 5px 3px #999;
 }
